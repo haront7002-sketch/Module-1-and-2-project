@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+body {
+  font-family: Inter, system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg-main);
+  color: var(--text-main);
+  transition: 0.3s;
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0 6px 24px var(--card-shadow);
+}
+
+.navbar-hr {
+  background: linear-gradient(90deg,#031227,#0aa5ff);
+}
+
+.avatar { width:54px; height:54px; }
+
+@media (max-width:767px) {
+  .container { padding-left:0.75rem; padding-right:0.75rem; }
+}
+
+@media print {
+  body * { visibility: hidden; }
+  .payslip-print, .payslip-print * { visibility: visible; }
+  .payslip-print { position: absolute; left:0; top:0; width:100%; }
+}
+
+/* Theme Variables */
+:root {
+  --bg-main: #f7fbff;
+  --text-main: #0f172a;
+  --card-bg: #ffffff;
+  --card-shadow: rgba(15, 23, 42, 0.06);
+}
+
+.dark {
+  --bg-main: #0b1120;
+  --text-main: #e2e8f0;
+  --card-bg: #97a4ba;
+  --card-shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* Themed Elements */
+.card {
+  background: var(--card-bg) !important;
+  box-shadow: 0 6px 24px var(--card-shadow) !important;
+}
+
+.table, .table td, .table th {
+  background-color: var(--card-bg) !important;
+  color: var(--text-main) !important;
+}
+
+.modal-container, .modal-content {
+  background: var(--card-bg) !important;
+  color: var(--text-main) !important;
+}
+
