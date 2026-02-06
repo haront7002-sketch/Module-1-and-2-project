@@ -1,24 +1,29 @@
-const express = require('express');
-const cors = require('cors'); 
-const pool = require('./database');
-const app = express();
+import express from "express"
+import cors from "cors"
+import dotenv from "dotenv"
+import { pool } from "./database.js"
+import reviewsRoutes from "./routes/reviewsRoutes.js"
 
-app.use(cors());
-app.use(express.json());
+dotenv.config()
 
-app.get('/api/employees_info', (req, res) => {
-    pool.query('SELECT * FROM employees_info', (error, results) => {
-        if (error) {
-            return res.status(500).json({ error: 'Database query error' });
+const app = express()
 
-        }
-        res.json(results)
-    })
-    
+app.use(cors())
+app.use(express.json())
+
+// EMPLOYEES
+app.get("/api/employees_info", async (req, res) => {
+    try {
+        const [rows] = await pool.query("SELECT * FROM employees_info")
+        res.json(rows)
+    } catch (err) {
+        res.status(500).json(err)
+    }
 })
 
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-}) 
+// REVIEWS
+app.use("/api/reviews", reviewsRoutes)
 
+app.listen(process.env.PORT || 3000, () => {
+    console.log("Server running on port 3000")
+})
